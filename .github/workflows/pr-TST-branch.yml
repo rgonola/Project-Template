@@ -25,6 +25,12 @@ jobs:
         runs-on: ubuntu-latest
         if: ${{ github.actor != 'dependabot[bot]' }}
         steps:
+
+            # Now we install nodejs in the VM, and specify version 14
+            - uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+
             # Install Salesforce CLI
             - name: 'Install Salesforce CLI'
               run: |
@@ -108,7 +114,7 @@ jobs:
             - name: 'Installing SFDX scanner'
               run: sfdx plugins:install @salesforce/sfdx-scanner
 
-            - name: 'Scan code'
+            - name: 'PMD Scan code'
               run: |
                 cd changed-sources
                 sfdx scanner:run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance" --outfile 'apexScanResults.sarif'  
