@@ -105,7 +105,7 @@ jobs:
 
             - name: 'Deploy destructive changes (if any) to Integration org'
               if: ${{ steps.customdestructivepackage.outputs.content != '' }}
-              run: sfdx force:mdapi:deploy -x customdestructive.xml --ignorewarnings 
+              run: sfdx force:mdapi:deploy -d customdestructive.xml --ignorewarnings 
 
             # Authenticate to org
             # - name: 'Authenticate to Staging Org to Staging org'
